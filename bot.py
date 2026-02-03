@@ -3,6 +3,7 @@ import asyncio
 import logging
 import random
 import time
+import os
 from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters import Command, CommandStart
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
@@ -10,7 +11,15 @@ from aiogram.utils.keyboard import ReplyKeyboardBuilder, InlineKeyboardBuilder
 
 from config import Config
 
-logging.basicConfig(level=logging.INFO)
+# Скрываем системную информацию
+os.environ['HOSTNAME'] = 'server'
+os.environ['USER'] = 'user'
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(message)s',
+    datefmt='%H:%M:%S'
+)
 logger = logging.getLogger(__name__)
 
 bot = Bot(token=Config.BOT_TOKEN)
@@ -120,7 +129,6 @@ async def cmd_start(message: types.Message):
 """
     
     await message.answer(welcome_text, reply_markup=get_main_menu())
-    logger.info(f"Новый пользователь: {user_id}")
 
 @dp.message(F.text == "💀 ИНФОРМАЦИЯ")
 async def btn_info(message: types.Message):
@@ -189,7 +197,6 @@ async def btn_stats(message: types.Message):
     
     await message.answer(stats_text)
 
-# Target кнопки
 target_buttons = [
     "👁️‍🗨️ Сканировать профиль жертвы",
     "⚰️ Создать",
@@ -238,15 +245,19 @@ async def cmd_admin(message: types.Message):
     await message.answer("🩸 Админ панель")
 
 async def main():
-    logger.info("💀 Бот запускается...")
+    logger.info("bot started")
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
-    print("=" * 40)
-    print("welcome to target")
-    print("=" * 40)
+    print("=" * 30)
+    print("target bot started")
+    print("=" * 30)
+    
+    # Скрываем Python версию и пути
+    import sys
+    sys.version = "3.x"
     
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
-        print("\n🛑 Бот остановлен")
+        print("\nbot stopped")
