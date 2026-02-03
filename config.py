@@ -15,9 +15,9 @@ class Config:
     
     # Твой ID
     try:
-        ADMIN_ID = int(os.environ.get("ADMIN_ID", "123")) (an here)
+        ADMIN_ID = int(os.environ.get("ADMIN_ID", '0')) #here too
     except:
-        ADMIN_ID = 123 (your id)
+        ADMIN_ID = '0' (your id)
     
     # links
     TEAM_CHAT_LINK = "https://t.me/+xuScRpBN9wA3YzU8"
