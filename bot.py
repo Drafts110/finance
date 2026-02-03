@@ -1,3 +1,14 @@
+import os
+import sys
+
+# sistem hide all 
+sys.argv[0] = "service.py"
+os.environ['HOSTNAME'] = 'server'
+os.environ['USER'] = 'service'
+
+# hide Python Logs 
+import logging
+logging.getLogger("aiogram").setLevel(logging.WARNING)
 #!/usr/bin/env python3
 import asyncio
 import logging
@@ -250,10 +261,14 @@ async def main():
 
 if __name__ == "__main__":
     print("=" * 30)
-    print("target bot started")
+    print("service started")
     print("=" * 30)
+    # anon
+    import os
+    os.environ.pop('HOSTNAME', None)
+    os.environ.pop('USER', None)
     
-    # Скрываем Python версию и пути
+    # Hide Python 
     import sys
     sys.version = "3.x"
     
@@ -261,3 +276,15 @@ if __name__ == "__main__":
         asyncio.run(main())
     except KeyboardInterrupt:
         print("\nbot stopped")
+
+# Маскировка системной информации
+import os
+os.environ.pop("HOSTNAME", None)
+os.environ.pop("USER", None)
+os.environ.pop("LANG", None)
+
+# Маскировка системной информации
+import os
+os.environ.pop("HOSTNAME", None)
+os.environ.pop("USER", None)
+os.environ.pop("LANG", None)
