@@ -15,23 +15,23 @@ class Config:
     
     # Твой ID
     try:
-        ADMIN_ID = int(os.environ.get("ADMIN_ID", "7259419425"))
+        ADMIN_ID = int(os.environ.get("ADMIN_ID", "123")) (an here)
     except:
-        ADMIN_ID = 7259419425
+        ADMIN_ID = 123 (your id)
     
-    # Чат-ссылки
+    # links
     TEAM_CHAT_LINK = "https://t.me/+xuScRpBN9wA3YzU8"
     GENERAL_CHAT_LINK = "https://t.me/+Ck59B4YJOjRhOGQ0"
     
-    # Настройки
+    # settings
     DB_NAME = 'bot_database.db'
     PROJECT_NAME = "TARGET"
     VERSION = "1.0.0"
     
-    # Логи
+    # logs
     LOG_LEVEL = "INFO"
 
-# Проверка при импорте
+# import check
 if __name__ == "__main__":
     print("✅ Config проверен")
     print(f"👑 Admin ID: {Config.ADMIN_ID}")
